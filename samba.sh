@@ -86,6 +86,13 @@ share() { local share="$1" path="$2" browsable=${3:-yes} ro=${4:-yes} \
         echo "   admin users = $(tr ',' ' ' <<< $admins)" >>$file
     [[ ${writelist:-""} && ! ${writelist:-""} =~ none ]] &&
         echo "   write list = $(tr ',' ' ' <<< $writelist)" >>$file
+
+    # Global Option: Allow Symlinks
+    if [ $ALLOW_SYMLINKS == "true" ]; then
+        echo "   follow symlinks = yes" >>$file
+        echo "   wide links = yes" >>$file
+    fi
+
     echo "" >>$file
 }
 
